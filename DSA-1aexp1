@@ -1,0 +1,22 @@
+#include<stdio.h>
+struct emplyid{
+    char name[20];
+    int idno;
+    char sector[10];
+}e;
+int main() {
+    printf("enter name:");
+    scanf("%s",e.name);
+
+    printf("idno:");
+    scanf("%d", &e.idno);
+
+    printf("sector:");
+    scanf("%s",e.sector);
+
+    printf("Name :%s",e.name);
+    printf("IDno:%d\n", e.idno);
+    printf("Section:%s\n",e.sector);
+
+   return  0;
+}
