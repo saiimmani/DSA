@@ -1,0 +1,34 @@
+#include<stdio.h>
+struct address{
+    int roomno;
+    char city[20];
+};
+struct emplyid{
+    char name[20];
+    int idno;
+    char sector[10];
+    struct address add;
+}e;
+int main() {
+    printf("enter name:");
+    scanf("%s",e.name);
+
+    printf("idno:");
+    scanf("%d", &e.idno);
+
+    printf("sector:");
+    scanf("%s",e.sector);
+
+    printf("enter room no: ");
+    scanf("%d", &e.add.roomno);
+
+    printf("city name:");
+    scanf("%s",e.add.city);
+    
+    printf("Name :%s",e.name);
+    printf("IDno:%d\n", e.idno);
+    printf("Section:%s\n",e.sector);
+    printf("Room:%d\n",e.add.roomno);
+    printf("City:%s",e.add.city);
+   return  0;
+}
