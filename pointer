@@ -1,0 +1,13 @@
+#include<stdio.h>
+int main()
+{
+	int *a,b=5,**c;
+	a=&b;
+	c=&a;
+	printf("a=%x\n",a);
+	printf("*a=%d\n",*a);
+	printf("c=%d\n",*c);
+	printf("b=%d\n",b);
+	printf("address of c=%x",c);
+    return 0;
+}
