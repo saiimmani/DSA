@@ -1,0 +1,21 @@
+#include<stdio.h>
+struct node
+{
+	int data; //data
+	struct node *link; //link
+	//Here an node consists of data and link 
+}a,b;
+int main()
+{
+	a.data=5;     //This initializating of data and link
+	a.link=NULL; //there link is null
+	b.data=6;
+	b.link=NULL;
+	a.link=&b;
+	printf("a=%d\n",a.data);
+	printf("b=%d\n",a.link->data);
+	printf("link part of a=%x\n",a.link);
+	printf("link part of b=%x\n",b.link);
+	//printf("b link:%x",a.link->link);
+return 0;		
+}
