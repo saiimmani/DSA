@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h> // Include for malloc and free
+
+int main() 
+{
+	int n,i,n1;
+	int *num;
+	printf("Enter n:");
+	scanf("%d",&n);
+	num=(int*)calloc(n,sizeof(int));
+	if(num==NULL)
+	{
+		printf("Memory is full");
+		return 1;
+	}
+	
+	for(i=0;i<n;i++)
+	{
+		printf("%x\n",num+i);
+	}
+
+	printf("Enter n1:");
+	scanf("%d",&n1);
+	num=(int*)realloc(num,n1*sizeof(int));
+
+	printf("The updated memory add :");
+	for(i=0;i<n1;i++)
+	{
+		printf("%x\n",num+i);
+	}
+free(num);
+return 1;
+}
