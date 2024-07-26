@@ -1,0 +1,13 @@
+#include<stdio.h>
+struct student{
+    int rollno;
+    char name[10];
+}*s1,s2;
+int main(){
+    s1=&s2;
+    scanf("%d",&s1->rollno);
+    scanf("%s",s1->name);
+    printf("Roll No: %d\n",s1->rollno);
+    printf("Name is %s\n",s1->name);
+    return 0;
+}  
