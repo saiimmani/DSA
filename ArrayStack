@@ -1,81 +1,113 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 100  // Define a maximum size for the stack
+#define MAX 100 // Define the maximum size of the stack
 
+// Define the stack structure
 typedef struct {
-    int top;
-    int data[MAX];
-} ArrayStack;
+    int arr[MAX]; // Array to hold the stack elements
+    int top;      // Index to track the top of the stack
+} Stack;
 
-// Initialize the stack
-void initStack(ArrayStack *s) {
-    s->top = -1;
+// Function prototypes
+void initStack(Stack *s);
+int isFull(Stack *s);
+int isEmpty(Stack *s);
+void push(Stack *s, int value);
+int pop(Stack *s);
+int peek(Stack *s);
+void display(Stack *s);
+
+int main() {
+    Stack s;
+    int option, value;
+
+    initStack(&s);
+
+    do {
+        printf("\n** STACK MENU **");
+        printf("\n1: Push an element");
+        printf("\n2: Pop an element");
+        printf("\n3: Peek at the top element");
+        printf("\n4: Display the stack");
+        printf("\n5: EXIT");
+        printf("\n\nEnter your option: ");
+        scanf("%d", &option);
+
+        switch (option) {
+            case 1:
+                if (isFull(&s)) {
+                    printf("\nStack is full.");
+                } else {
+                    printf("\nEnter the value to push: ");
+                    scanf("%d", &value);
+                    push(&s, value);
+                    printf("\nValue pushed.");
+                }
+                break;
+            case 2:
+                if (isEmpty(&s)) {
+                    printf("\nStack is empty.");
+                } else {
+                    value = pop(&s);
+                    printf("\nPopped value: %d", value);
+                }
+                break;
+            case 3:
+                if (isEmpty(&s)) {
+                    printf("\nStack is empty.");
+                } else {
+                    value = peek(&s);
+                    printf("\nTop value: %d", value);
+                }
+                break;
+            case 4:
+                display(&s);
+                break;
+        }
+    } while (option != 5);
+
+    return 0;
 }
 
-// Check if the stack is empty
-int isEmpty(ArrayStack *s) {
-    return s->top == -1;
+// Initialize the stack
+void initStack(Stack *s) {
+    s->top = -1; // Stack is empty
 }
 
 // Check if the stack is full
-int isFull(ArrayStack *s) {
+int isFull(Stack *s) {
     return s->top == MAX - 1;
 }
 
-// Push an item onto the stack
-void push(ArrayStack *s, int item) {
-    if (isFull(s)) {
-        printf("Error: Stack is full\n");
-        return;
-    }
-    s->data[++(s->top)] = item;
+// Check if the stack is empty
+int isEmpty(Stack *s) {
+    return s->top == -1;
 }
 
-// Pop an item off the stack
-int pop(ArrayStack *s) {
+// Push an element onto the stack
+void push(Stack *s, int value) {
+    s->arr[++s->top] = value;
+}
+
+// Pop an element from the stack
+int pop(Stack *s) {
+    return s->arr[s->top--];
+}
+
+// Peek at the top element of the stack
+int peek(Stack *s) {
+    return s->arr[s->top];
+}
+
+// Display the stack
+void display(Stack *s) {
     if (isEmpty(s)) {
-        printf("Error: Stack is empty\n");
-        return -1;  // Return a sentinel value indicating error
+        printf("\nStack is empty.");
+    } else {
+        printf("\nStack elements are:");
+        for (int i = 0; i <= s->top; i++) {
+            printf("\t%d", s->arr[i]);
+        }
     }
-    return s->data[(s->top)--];
-}
-
-// Peek at the top item of the stack
-int peek(ArrayStack *s) {
-    if (isEmpty(s)) {
-        printf("Error: Stack is empty\n");
-        return -1;  // Return a sentinel value indicating error
-    }
-    return s->data[s->top];
-}
-
-// Print the stack
-void printStack(ArrayStack *s) {
-    if (isEmpty(s)) {
-        printf("Stack is empty\n");
-        return;
-    }
-    printf("Stack contents (top to bottom):\n");
-    for (int i = s->top; i >= 0; i--) {
-        printf("%d\n", s->data[i]);
-    }
-}
-
-// Example usage
-int main() {
-    ArrayStack stack;
-    initStack(&stack);
-
-    push(&stack, 10);
-    push(&stack, 20);
-    push(&stack, 30);
-
-    printf("Top item: %d\n", peek(&stack));
-    printStack(&stack);
-
-    printf("Popped item: %d\n", pop(&stack));
-    printStack(&stack);
-
-    return 0;
 }
