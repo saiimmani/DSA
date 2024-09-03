@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 100  // Define a maximum size for the stack
+
+typedef struct {
+    int top;
+    int data[MAX];
+} ArrayStack;
+
+// Initialize the stack
+void initStack(ArrayStack *s) {
+    s->top = -1;
+}
+
+// Check if the stack is empty
+int isEmpty(ArrayStack *s) {
+    return s->top == -1;
+}
+
+// Check if the stack is full
+int isFull(ArrayStack *s) {
+    return s->top == MAX - 1;
+}
+
+// Push an item onto the stack
+void push(ArrayStack *s, int item) {
+    if (isFull(s)) {
+        printf("Error: Stack is full\n");
+        return;
+    }
+    s->data[++(s->top)] = item;
+}
+
+// Pop an item off the stack
+int pop(ArrayStack *s) {
+    if (isEmpty(s)) {
+        printf("Error: Stack is empty\n");
+        return -1;  // Return a sentinel value indicating error
+    }
+    return s->data[(s->top)--];
+}
+
+// Peek at the top item of the stack
+int peek(ArrayStack *s) {
+    if (isEmpty(s)) {
+        printf("Error: Stack is empty\n");
+        return -1;  // Return a sentinel value indicating error
+    }
+    return s->data[s->top];
+}
+
+// Print the stack
+void printStack(ArrayStack *s) {
+    if (isEmpty(s)) {
+        printf("Stack is empty\n");
+        return;
+    }
+    printf("Stack contents (top to bottom):\n");
+    for (int i = s->top; i >= 0; i--) {
+        printf("%d\n", s->data[i]);
+    }
+}
+
+// Example usage
+int main() {
+    ArrayStack stack;
+    initStack(&stack);
+
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+
+    printf("Top item: %d\n", peek(&stack));
+    printStack(&stack);
+
+    printf("Popped item: %d\n", pop(&stack));
+    printStack(&stack);
+
+    return 0;
+}
