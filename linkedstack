@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a node in the linked list
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+// Define the structure for the stack
+typedef struct {
+    Node* top;
+} LinkedListStack;
+
+// Function to initialize the stack
+void initStack(LinkedListStack* s) {
+    s->top = NULL;
+}
+
+// Function to check if the stack is empty
+int isEmpty(LinkedListStack* s) {
+    return s->top == NULL;
+}
+
+// Function to push an item onto the stack
+void push(LinkedListStack* s, int item) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (newNode == NULL) {
+        printf("Error: Memory allocation failed\n");
+        return;
+    }
+    newNode->data = item;
+    newNode->next = s->top;
+    s->top = newNode;
+}
+
+// Function to pop an item off the stack
+int pop(LinkedListStack* s) {
+    if (isEmpty(s)) {
+        printf("Error: Stack is empty\n");
+        return -1;  // Return a sentinel value indicating error
+    }
+    Node* temp = s->top;
+    int item = temp->data;
+    s->top = s->top->next;
+    free(temp);
+    return item;
+}
+
+// Function to peek at the top item of the stack
+int peek(LinkedListStack* s) {
+    if (isEmpty(s)) {
+        printf("Error: Stack is empty\n");
+        return -1;  // Return a sentinel value indicating error
+    }
+    return s->top->data;
+}
+
+// Function to print the stack
+void printStack(LinkedListStack* s) {
+    if (isEmpty(s)) {
+        printf("Stack is empty\n");
+        return;
+    }
+    Node* current = s->top;
+    printf("Stack contents (top to bottom):\n");
+    while (current != NULL) {
+        printf("%d\n", current->data);
+        current = current->next;
+    }
+}
+
+// Function to free the stack memory
+void freeStack(LinkedListStack* s) {
+    while (!isEmpty(s)) {
+        pop(s);
+    }
+}
+
+// Example usage
+int main() {
+    LinkedListStack stack;
+    initStack(&stack);
+
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+
+    printf("Top item: %d\n", peek(&stack));
+    printStack(&stack);
+
+    printf("Popped item: %d\n", pop(&stack));
+    printStack(&stack);
+
+    // Free the stack's memory
+    freeStack(&stack);
+
+    return 0;
+}
