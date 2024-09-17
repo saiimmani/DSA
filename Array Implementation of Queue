@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 100  // Define the maximum size of the queue
+
+// Define a structure for the Queue
+struct Queue {
+    int items[MAX];
+    int front, rear;
+};
+
+// Function to initialize the Queue
+void initializeQueue(struct Queue* q) {
+    q->front = -1;
+    q->rear = -1;
+}
+
+// Function to check if the queue is full
+int isFull(struct Queue* q) {
+    return (q->rear == MAX - 1);
+}
+
+// Function to check if the queue is empty
+int isEmpty(struct Queue* q) {
+    return (q->front == -1 || q->front > q->rear);
+}
+
+// Function to enqueue (insert) an element into the queue
+void enqueue(struct Queue* q, int data) {
+    if (isFull(q)) {
+        printf("Queue is full! Cannot enqueue %d.\n", data);
+        return;
+    }
+
+    // If queue is empty, set front to 0
+    if (q->front == -1) {
+        q->front = 0;
+    }
+
+    // Increment rear and add the new element
+    q->rear++;
+    q->items[q->rear] = data;
+    printf("Enqueued %d\n", data);
+}
+
+// Function to dequeue (remove) an element from the queue
+int dequeue(struct Queue* q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty! Cannot dequeue.\n");
+        return -1;
+    }
+
+    int data = q->items[q->front];
+    q->front++;
+
+    // Reset the queue if all elements are dequeued
+    if (q->front > q->rear) {
+        q->front = q->rear = -1;
+    }
+
+    printf("Dequeued %d\n", data);
+    return data;
+}
+
+// Function to display the queue elements
+void display(struct Queue* q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty!\n");
+        return;
+    }
+
+    printf("Queue elements: ");
+    for (int i = q->front; i <= q->rear; i++) {
+        printf("%d ", q->items[i]);
+    }
+    printf("\n");
+}
+
+// Main function to demonstrate the queue operations with user input
+int main() {
+    struct Queue q;
+    initializeQueue(&q);
+
+    // Variable declarations moved to the top, as per C99 requirements
+    int choice, value;
+
+    do {
+        printf("\nQueue Operations Menu:\n");
+        printf("1. Enqueue\n");
+        printf("2. Dequeue\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the value to enqueue: ");
+                scanf("%d", &value);
+                enqueue(&q, value);
+                break;
+            case 2:
+                dequeue(&q);
+                break;
+            case 3:
+                display(&q);
+                break;
+            case 4:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    } while (choice != 4);
+
+    return 0;
+}
