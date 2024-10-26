@@ -1,1 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+// Define the structure of a node
+struct Node {
+    int value;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Create a new node
+struct Node* newNode(int value) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->value = value;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// Insert a node into the binary tree
+struct Node* insertNode(struct Node* root, int value) {
+    if (root == NULL) {
+        return newNode(value);
+    }
+
+    int choice;
+    printf("Where to insert %d? Enter 1 for left, 2 for right of %d: ", value, root->value);
+    scanf("%d", &choice);
+
+    if (choice == 1) {
+        root->left = insertNode(root->left, value);
+    } else if (choice == 2) {
+        root->right = insertNode(root->right, value);
+    } else {
+        printf("Invalid choice. Node not inserted.\n");
+    }
+
+    return root;
+}
+
+// In-Order Traversal (Left, Root, Right)
+void inOrder(struct Node* node) {
+    if (node == NULL) return;
+    inOrder(node->left);
+    printf("%d ", node->value);
+    inOrder(node->right);
+}
+
+// Pre-Order Traversal (Root, Left, Right)
+void preOrder(struct Node* node) {
+    if (node == NULL) return;
+    printf("%d ", node->value);
+    preOrder(node->left);
+    preOrder(node->right);
+}
+
+// Post-Order Traversal (Left, Right, Root)
+void postOrder(struct Node* node) {
+    if (node == NULL) return;
+    postOrder(node->left);
+    postOrder(node->right);
+    printf("%d ", node->value);
+}
+
+// Main function
+int main() {
+    struct Node* root = NULL;
+    int n, value;
+
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+
+    // Create the binary tree based on user input
+    for (int i = 0; i < n; i++) {
+        printf("Enter value for node %d: ", i + 1);
+        scanf("%d", &value);
+
+        if (root == NULL) {
+            root = newNode(value);
+        } else {
+            insertNode(root, value);
+        }
+    }
+
+    // Perform traversals
+    printf("\nIn-Order Traversal: ");
+    inOrder(root);
+
+    printf("\nPre-Order Traversal: ");
+    preOrder(root);
+
+    printf("\nPost-Order Traversal: ");
+    postOrder(root);
+
+    return 0;
+}
