@@ -13,6 +13,7 @@ Welcome to the **Data Structures and Algorithms (DSA)** repository! This reposit
   - [Doubly Linked List](#doubly-linked-list)
   - [Stacks](#stacks)
   - [Queues](#queues)
+  - [Graphs](#Graphs)
 - [Getting Started](#getting-started)
 ## Introduction
 This repository contains practical programming examples of various data structures. Each implementation is accompanied by clear explanations, use cases, and code examples to help users understand the concepts thoroughly.
