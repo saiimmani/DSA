@@ -7,7 +7,6 @@ Welcome to the **Data Structures and Algorithms (DSA)** repository! This reposit
 - [Introduction](#introduction)
 - [Data Structures Covered](#data-structures-covered)
   - [List](#list)
-  - [Structure](#structure)
   - [Linked List](#linked-list)
   - [Tree](#tree)
   - [Hash Function](#hash-function)
