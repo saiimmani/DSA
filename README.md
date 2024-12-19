@@ -9,7 +9,6 @@ Welcome to the **Data Structures and Algorithms (DSA)** repository! This reposit
   - [List](#list)
   - [Linked List](#linked-list)
   - [Tree](#tree)
-  - [Hash Function](#hash-function)
   - [Doubly Linked List](#doubly-linked-list)
   - [Stacks](#stacks)
   - [Queues](#queues)
